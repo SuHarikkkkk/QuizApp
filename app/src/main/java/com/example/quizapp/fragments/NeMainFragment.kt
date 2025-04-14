@@ -19,7 +19,7 @@ import com.example.quizapp.models.Quiz
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-class neMainFragment : Fragment() {
+class NeMainFragment : Fragment() {
     lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     lateinit var adapter: QuizAdapter
     private var quizList = mutableListOf<Quiz>()
@@ -31,8 +31,6 @@ class neMainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-
-
     ): View? {
         populateDummyData()
 

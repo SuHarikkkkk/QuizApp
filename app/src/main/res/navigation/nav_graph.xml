@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/neMainFragment"
-        android:name="com.example.quizapp.fragments.neMainFragment"
+        android:name="com.example.quizapp.fragments.NeMainFragment"
         android:label="fragment_ne_main"
         tools:layout="@layout/fragment_ne_main" />
 </navigation>

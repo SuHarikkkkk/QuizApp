@@ -2,6 +2,7 @@ package com.example.quizapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.quizapp.R

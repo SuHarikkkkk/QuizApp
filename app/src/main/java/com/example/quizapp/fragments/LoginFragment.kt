@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.quizapp.R
 import com.example.quizapp.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -20,7 +21,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         firebaseAuth = FirebaseAuth.getInstance()
@@ -29,19 +30,21 @@ class LoginFragment : Fragment() {
             it.findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
 
         }
-        binding.btnSignUp2.setOnClickListener{
+        binding.btnSignUp2.setOnClickListener {
             val email = binding.etEmailAddress.text.toString()
             val pass = binding.etPassword.text.toString()
 
             if (email.isNotEmpty() && pass.isNotEmpty()) {
-                firebaseAuth.signInWithEmailAndPassword(email.trim(), pass).addOnCompleteListener{
+                firebaseAuth.signInWithEmailAndPassword(email.trim(), pass).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        binding.btnSignUp2.setOnClickListener {
-                            it.findNavController().navigate(R.id.action_loginFragment_to_neMainFragment)
-                        }
-
-                    }else{
-                        Toast.makeText(requireContext(), it.exception.toString(), Toast.LENGTH_SHORT).show()
+                        requireParentFragment().findNavController()
+                            .navigate(R.id.action_loginFragment_to_neMainFragment)
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            it.exception.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
                         Log.d("afsfassaf", it.exception.toString())
                     }
                 }
