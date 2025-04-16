@@ -1,4 +1,5 @@
 package com.example.quizapp.fragments
+import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract.RawContacts.Data
 import android.util.Log
@@ -8,14 +9,19 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizapp.R
+import com.example.quizapp.R.id.appBar
 import com.example.quizapp.adapters.QuizAdapter
 import com.example.quizapp.databinding.FragmentNeMainBinding
 import com.example.quizapp.models.Quiz
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -33,16 +39,74 @@ class NeMainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         populateDummyData()
+        appBar = R.id.appBar
+
+//        fun setUpDrawerLayout() {
+//            val appBar = requireView().findViewById<Toolbar>(appBar)
+//            val mainDrawer = requireView().findViewById<DrawerLayout>(R.id.mainDrawer)
+//            val navigationView = requireView().findViewById<NavigationView>(R.id.navigationView)
+//            (requireActivity() as AppCompatActivity).setSupportActionBar(appBar)
+//            actionBarDrawerToggle = ActionBarDrawerToggle(
+//                requireActivity(),
+//                mainDrawer,
+//                appBar,
+//                R.string.app_name,
+//                R.string.app_name
+//            )
+//
+//            // Синхронизируем состояние
+//            actionBarDrawerToggle.syncState()
+//
+//            // Устанавливаем слушатель навигации
+//            navigationView.setNavigationItemSelectedListener { menuItem ->
+//                when (menuItem.itemId) {
+//                    R.id.btnFollowUs -> {
+//                        val intent = Intent(requireContext(), ProfileActivity::class.java)
+//                        startActivity(intent)
+//                    }
+//                }
+//                mainDrawer.closeDrawers()
+//                true
+//            }
+//        }
+
 
         fun setUpDrawerLayout() {
-            if(activity is AppCompatActivity){
-                (activity as AppCompatActivity).setSupportActionBar(view?.findViewById(R.id.appBar))
+            val appBar = requireView().findViewById<MaterialToolbar>(R.id.appBar)
+            val mainDrawer = requireView().findViewById<DrawerLayout>(R.id.mainDrawer)
+            val navigationView = requireView().findViewById<NavigationView>(R.id.navigationView)
+
+            (requireActivity() as AppCompatActivity).setSupportActionBar(appBar)
+
+            // Включаем кнопку "Назад" (это активирует иконку гамбургера)
+            (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+                setDisplayHomeAsUpEnabled(true)
+                setHomeButtonEnabled(true)
             }
-            actionBarDrawerToggle = ActionBarDrawerToggle(requireActivity(),(view?.findViewById(R.id.mainDrawer)),
-                R.string.app_name,
-                R.string.app_name
-            )
-            actionBarDrawerToggle.syncState()
+
+            // Создаём ActionBarDrawerToggle и привязываем его к DrawerLayout
+            actionBarDrawerToggle = ActionBarDrawerToggle(
+                requireActivity(),
+                mainDrawer,
+                appBar,
+                R.string.open_drawer,  // Опционально: строки для accessibility
+                R.string.close_drawer
+            ).apply {
+                syncState()  // Синхронизация состояния иконки
+                mainDrawer.addDrawerListener(this)  // Добавляем слушатель
+            }
+
+            // Обработка кликов в NavigationView
+            navigationView.setNavigationItemSelectedListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.btnFollowUs -> {
+                        val intent = Intent(requireContext(), LoginIntroFragment::class.java)
+                        startActivity(intent)
+                    }
+                }
+                mainDrawer.closeDrawers()
+                true
+            }
         }
 
         fun setUpRecyclerView() {

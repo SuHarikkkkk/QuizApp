@@ -40,4 +40,13 @@
         android:name="com.example.quizapp.fragments.NeMainFragment"
         android:label="fragment_ne_main"
         tools:layout="@layout/fragment_ne_main" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.quizapp.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>
