@@ -40,8 +40,6 @@ android {
 }
 
 dependencies {
-    //implementation(platform("com.google.firebase:firebase-bom:33.11.0"))
-    //implementation("com.google.firebase:firebase-analytics")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -50,11 +48,10 @@ dependencies {
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
-
+    implementation("com.google.code.gson:gson:2.8.9")
     implementation ("com.google.firebase:firebase-auth:23.2.0")
     implementation(libs.androidx.runtime.android)
     implementation(libs.androidx.storage)
-
     implementation("com.google.android.material:material:1.9.0")
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.lifecycle.livedata.ktx)
