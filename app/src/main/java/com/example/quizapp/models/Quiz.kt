@@ -1,8 +1,7 @@
 package com.example.quizapp.models
 
 data class Quiz(
-    var id: String = "",
+    var id: Int,
     var title: String = "",
     var questions: MutableMap<String, Question> = mutableMapOf()
-
 )

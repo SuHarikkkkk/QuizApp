@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.quizapp.R
 import com.example.quizapp.fragments.ResultFragment
 import com.example.quizapp.adapters.OptionAdapter
+import com.example.quizapp.databinding.FragmentNeMainBinding
 import com.example.quizapp.databinding.FragmentQuestionBinding
 import com.example.quizapp.databinding.FragmentSignupBinding
 import com.example.quizapp.models.Question
@@ -26,12 +27,14 @@ class QuestionFragment : Fragment() {
     private var index = 1
     private lateinit var binding: FragmentQuestionBinding
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_question, container, false)
+    ): View {
+        binding = FragmentQuestionBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,8 +58,7 @@ class QuestionFragment : Fragment() {
             Log.d("FINALQUIZ", questions.toString())
 
             val json = Gson().toJson(quizzes!![0])
-            //val action = QuestionFragmentDirections
-                //.actionQuestionFragmentToResultFragment(quizJson = json)
+//            val action = QuestionFragmentDirections.actionQuestionFragmentToResultFragment(json)
             findNavController().navigate(R.id.action_questionFragment_to_resultFragment)
         }
     }

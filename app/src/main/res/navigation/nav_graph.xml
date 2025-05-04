@@ -39,7 +39,14 @@
         android:id="@+id/neMainFragment"
         android:name="com.example.quizapp.fragments.NeMainFragment"
         android:label="fragment_ne_main"
-        tools:layout="@layout/fragment_ne_main" />
+        tools:layout="@layout/fragment_ne_main" >
+        <action
+            android:id="@+id/action_neMainFragment_to_questionFragment"
+            app:destination="@id/questionFragment" />
+        <action
+            android:id="@+id/action_neMainFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.quizapp.fragments.ProfileFragment"

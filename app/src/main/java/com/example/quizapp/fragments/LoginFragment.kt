@@ -26,6 +26,11 @@ class LoginFragment : Fragment() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            findNavController().navigate(R.id.action_loginFragment_to_neMainFragment)
+        }
+
         binding.btnSignUp.setOnClickListener {
             it.findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
 

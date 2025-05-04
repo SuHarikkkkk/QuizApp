@@ -31,6 +31,6 @@ class ProfileFragment : Fragment() {
             it.findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
         }
 
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        return binding.root
     }
 }
